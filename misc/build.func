@@ -619,6 +619,9 @@ EOF
     fi
   fi
 
+echo "Waiting 120 seconds..."
+sleep 120
+
   # This starts the container and executes <app>-install.sh
   msg_info "Starting LXC Container"
   pct start "$CTID"
