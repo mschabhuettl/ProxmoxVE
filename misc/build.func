@@ -1181,6 +1181,9 @@ lxc.mount.entry: /dev/net/tun dev/net/tun none bind,create=file
 EOF
   fi
 
+echo "Waiting 240 seconds..."
+sleep 240
+
   # This starts the container and executes <app>-install.sh
   msg_info "Starting LXC Container"
   pct start "$CTID"
