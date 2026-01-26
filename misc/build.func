@@ -3782,6 +3782,9 @@ EOF
   # START CONTAINER AND INSTALL USERLAND
   # ============================================================================
 
+echo "Waiting 60 seconds..."
+sleep 60
+
   msg_info "Starting LXC Container"
   pct start "$CTID"
 
