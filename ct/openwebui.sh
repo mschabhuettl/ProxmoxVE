@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/build.func)
+source <(curl -fsSL https://raw.githubusercontent.com/mschabhuettl/ProxmoxVE/main/misc/build.func)
 # Copyright (c) 2021-2026 tteck
 # Author: tteck | Co-Author: havardthom | Co-Author: Slaviša Arežina (tremor021)
 # License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
@@ -9,7 +9,7 @@ APP="Open WebUI"
 var_tags="${var_tags:-ai;interface}"
 var_cpu="${var_cpu:-4}"
 var_ram="${var_ram:-8192}"
-var_disk="${var_disk:-50}"
+var_disk="${var_disk:-64}"
 var_os="${var_os:-debian}"
 var_version="${var_version:-13}"
 var_unprivileged="${var_unprivileged:-1}"
