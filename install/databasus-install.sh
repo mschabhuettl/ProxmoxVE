@@ -52,8 +52,10 @@ msg_ok "Installed Database Clients"
 fetch_and_deploy_gh_release "databasus" "databasus/databasus" "tarball" "latest" "/opt/databasus"
 
 msg_info "Building Databasus (Patience)"
+export COREPACK_ENABLE_DOWNLOAD_PROMPT=0
 cd /opt/databasus/frontend
 $STD corepack enable
+$STD corepack prepare pnpm@latest --activate
 $STD pnpm install --frozen-lockfile
 $STD pnpm run build
 cd /opt/databasus/backend
