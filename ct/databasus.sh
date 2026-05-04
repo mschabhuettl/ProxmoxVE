@@ -35,7 +35,8 @@ function update_script() {
     msg_ok "Stopped Databasus"
 
     msg_info "Backing up Configuration"
-    cp /opt/databasus/.env /opt/databasus.env.bak
+    cp /.env /opt/databasus.env.bak
+    chmod 600 /opt/databasus.env.bak
     msg_ok "Backed up Configuration"
 
     msg_info "Ensuring Database Clients"
@@ -84,10 +85,17 @@ function update_script() {
     msg_ok "Updated Databasus"
 
     msg_info "Restoring Configuration"
-    cp /opt/databasus.env.bak /opt/databasus/.env
+    cp /opt/databasus.env.bak /.env
     rm -f /opt/databasus.env.bak
-    chown postgres:postgres /opt/databasus/.env
+    chmod 600 /.env
     msg_ok "Restored Configuration"
+
+    if ! grep -q "EnvironmentFile=/.env" /etc/systemd/system/databasus.service; then
+      msg_info "Updating Service"
+      sed -i 's|EnvironmentFile=.*|EnvironmentFile=/.env|' /etc/systemd/system/databasus.service
+      $STD systemctl daemon-reload
+      msg_ok "Updated Service"
+    fi
 
     msg_info "Starting Databasus"
     $STD systemctl start databasus
