@@ -206,7 +206,10 @@ EOF
       sed -i 's|/app/nginx|/opt/termix/nginx|g' /etc/nginx/nginx.conf
       sed -i 's|listen ${PORT};|listen 80;|g' /etc/nginx/nginx.conf
 
-      nginx -t && systemctl reload nginx
+      rm -f /etc/systemd/system/nginx.service.d/pidfile.conf
+      rm -f /etc/tmpfiles.d/nginx-termix.conf
+      systemctl daemon-reload
+      nginx -t && systemctl restart nginx
       msg_ok "Updated Nginx Configuration"
     else
       msg_warn "Nginx configuration not updated. If Termix doesn't work, restore from backup or update manually."
