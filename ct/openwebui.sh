@@ -23,9 +23,9 @@ unset _core_boot
 
 APP="Open WebUI"
 var_tags="${var_tags:-ai;interface}"
-var_cpu="${var_cpu:-4}"
+var_cpu="${var_cpu:-8}"
 var_ram="${var_ram:-8192}"
-var_disk="${var_disk:-50}"
+var_disk="${var_disk:-64}"
 var_os="${var_os:-debian}"
 var_version="${var_version:-13}"
 var_arm64="${var_arm64:-yes}"
