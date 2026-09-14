@@ -1,7 +1,21 @@
 #!/usr/bin/env bash
-_CS_DEFAULT_URL="https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main"
-_cs_boot="${COMMUNITY_SCRIPTS_CORE_DIR:-$(dirname "${BASH_SOURCE[0]}")/../../core}/core/build.func"
-source "$_cs_boot" 2>/dev/null || source <(curl -fsSL "${COMMUNITY_SCRIPTS_CORE_URL:-https://raw.githubusercontent.com/community-scripts/core/main}/core/build.func")
+_CS_DEFAULT_URL="https://raw.githubusercontent.com/mschabhuettl/ProxmoxVE/main"
+export COMMUNITY_SCRIPTS_URL="$_CS_DEFAULT_URL"
+export COMMUNITY_SCRIPTS_CORE_URL="https://raw.githubusercontent.com/mschabhuettl/core/main"
+
+_core_boot="$(mktemp)"
+
+if ! curl -fsSL --retry 3 \
+  "${COMMUNITY_SCRIPTS_CORE_URL}/core/build.func" \
+  -o "$_core_boot"; then
+  echo "Fehler: Eigene core/build.func konnte nicht geladen werden" >&2
+  rm -f "$_core_boot"
+  exit 1
+fi
+
+source "$_core_boot"
+rm -f "$_core_boot"
+unset _core_boot
 # Copyright (c) 2021-2026 tteck
 # Author: havardthom | Co-Author: MickLesk (CanbiZ)
 # License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
